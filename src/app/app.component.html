@@ -1,0 +1,48 @@
+<div>
+  <form (ngSubmit)="add()">
+    <div>
+      <label style="font-weight: 800;">Task</label>
+      <input type="text" class="form-control" name="task" [(ngModel)]="task">
+  </div>
+
+
+
+
+<div class="col text-center" style="margin-top: 50px; margin-bottom: 150px;">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+
+  </form>
+</div>
+
+<div style="display: flex;">
+
+  <div 
+  cdkDropList 
+  [cdkDropListData]='number'
+  [cdkDropListConnectedTo]="other"
+  #first=cdkDropList
+  (cdkDropListDropped)="drop($event)" style="width: 25%; border:solid red 1px;">
+  <h1>New task</h1>
+    <div cdkDrag *ngFor="let number of number" class='item'>
+      {{number}}
+      <button (click)="del(number)">del</button>
+  
+    </div>
+  
+  </div>
+  
+  
+  <div cdkDropList
+  [cdkDropListData]='othernumber' 
+  [cdkDropListConnectedTo]="first"
+  #other=cdkDropList
+  (cdkDropListDropped)="drop($event)" style="width: 25%; border:solid blue 1px;">
+  <h1>Completed task</h1>
+    <div cdkDrag *ngFor="let number of othernumber" class='item'>
+      {{number}}
+   <button (click)="del(number)">del</button>
+    </div>
+  
+  </div>
+</div>
